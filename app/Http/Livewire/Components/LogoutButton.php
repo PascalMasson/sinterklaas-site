@@ -14,8 +14,10 @@ class LogoutButton extends Component
 
     public function logout()
     {
-        if (Session::has('loggedInUser')) {
-            Session::pull('loggedInUser');
+        if (auth()->check()) {
+            auth()->logout();
+            \session()->invalidate();
+            \session()->regenerateToken();
         }
 
         return redirect(route('login'));

@@ -4,12 +4,11 @@ namespace App\Http\Livewire\Pages;
 
 use App\Models\Cadeau;
 use App\Models\User;
-use App\Traits\UseLoggedInUser;
+use Auth;
 use Livewire\Component;
 
 class Lijst extends Component
 {
-    use UseLoggedInUser;
 
     public $lijstId;
     public $cadeaus;
@@ -18,7 +17,7 @@ class Lijst extends Component
 
     public function mount($lijstId)
     {
-        $this->isMyList = $this->lijstId == $this->getLoggedInUserId();
+        $this->isMyList = $this->lijstId == Auth::id();
         $this->lijstId = $lijstId;
         $this->cadeaus = Cadeau::where('listId', $this->lijstId)
             ->withCount('images')

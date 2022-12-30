@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class AuthCheck
 {
@@ -18,7 +19,7 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!Session()->has('loggedInUser')) {
+        if (!Auth::check()) {
             return redirect(route('login'));
         }
         return $next($request);

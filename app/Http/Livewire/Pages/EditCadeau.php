@@ -73,7 +73,7 @@ class EditCadeau extends Component
                 $path = $image->storeAs('images', $name, 'public');
                 $attachment = new Attachment;
                 $attachment->url = $path;
-                $attachment->uploadedBy = Session::get('loggedInUser')->id;
+                $attachment->uploadedBy = auth()->id();
                 $attachment->cadeauId = $cadeauId;
                 $attachment->save();
             }

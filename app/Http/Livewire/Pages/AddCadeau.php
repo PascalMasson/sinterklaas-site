@@ -41,8 +41,8 @@ class AddCadeau extends Component
     {
         $formData = $this->validate();
 
-        $formData['createdBy'] = Session::get('loggedInUser')->id;
-        $formData['listId'] = Session::get('loggedInUser')->id;
+        $formData['createdBy'] = auth()->id();
+        $formData['listId'] = auth()->id();
 
         $cadeau = Cadeau::create($formData);
 
@@ -61,7 +61,7 @@ class AddCadeau extends Component
                 $path = $image->storeAs('images', $fileName, 'public');
                 $attachment = new Attachment;
                 $attachment->url = $path;
-                $attachment->uploadedBy = Session::get('loggedInUser')->id;
+                $attachment->uploadedBy = auth()->id();
                 $attachment->cadeauId = $cadeauId;
                 $attachment->save();
             }

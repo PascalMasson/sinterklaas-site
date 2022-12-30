@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class AlreadyLoggedIn
@@ -19,10 +20,8 @@ class AlreadyLoggedIn
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session::has('loggedInUser') && (url(route('login')) == $request->url())) {
-            $user = \Illuminate\Support\Facades\Session::get('loggedInUser');
-
-            return redirect(route('lijst', $user->id));
+        if (Auth::check() && (url(route('login')) == $request->url())) {
+            return redirect(route('lijst', Auth::id()));
         }
         return $next($request);
     }

@@ -19,7 +19,7 @@
 
 </head>
 <body>
-@if(session()->has('loggedInUser'))
+@if(auth()->check())
     @livewire('partials.nav')
 @endif
 

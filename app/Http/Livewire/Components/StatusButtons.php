@@ -2,13 +2,12 @@
 
 namespace App\Http\Livewire\Components;
 
-use App\Traits\UseLoggedInUser;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class StatusButtons extends Component
 {
-    use UseLoggedInUser;
 
     public $cadeau;
     public $stretch;
@@ -55,7 +54,7 @@ class StatusButtons extends Component
         if ($status == "VRIJ") {
             $this->cadeau->reservedBy = null;
         } else {
-            $this->cadeau->reservedBy = $this->getLoggedInUserId();
+            $this->cadeau->reservedBy = Auth::id();
         }
         $this->cadeau->save();
         $this->emit('refreshCadeau');
@@ -72,7 +71,7 @@ class StatusButtons extends Component
 
     public function canSetCadeauStatus($cadeau, $status)
     {
-        $user = Session::get('loggedInUser');
+        $user = Auth::id();
         if ($status == "VRIJ") {
             return $cadeau->reservedBy == $user->id || $cadeau->reservedBy == $user->partnerId;
         } else {
