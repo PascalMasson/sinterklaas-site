@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Pages;
 
 use App\Models\Cadeau;
 use App\Traits\UseLoggedInUser;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Reserveringen extends Component
@@ -18,7 +17,12 @@ class Reserveringen extends Component
         $reserveringenRaw = Cadeau::where(function ($query) {
             $query->where('reservedBy', $this->getLoggedInUserId())
                 ->orWhere('reservedBy', $this->getLoggedInUser()->partnerId);
-        })->where('listId', '!=', $this->getLoggedInUserId())->withCount('images')->with('images')->with('listOwner')->get();
+        })
+            ->where('listId', '!=', $this->getLoggedInUserId())
+            ->withCount('images')
+            ->with('images')
+            ->with('listOwner')
+            ->get();
 
         foreach ($reserveringenRaw as $reservering) {
             $this->reserveringen[$reservering->listOwner->name][] = $reservering;

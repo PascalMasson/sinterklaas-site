@@ -7,7 +7,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Rennokki\QueryCache\Traits\QueryCacheable;
 
 /**
@@ -22,28 +22,27 @@ use Rennokki\QueryCache\Traits\QueryCacheable;
  *
  * @package App\Models
  */
-class User extends Model
+class User extends Authenticatable
 {
 
     use QueryCacheable;
-    protected $cacheFor = 1800; // 3 minutes
 
-	protected $table = 'users';
-	public $timestamps = false;
+    public $timestamps = false; // 3 minutes
+    protected $cacheFor = 1800;
+    protected $table = 'users';
+    protected $fillable = [
+        'name'
+    ];
 
-	protected $fillable = [
-		'name'
-	];
+    public function images()
+    {
+        return $this->hasMany(Attachment::class, 'uploadedBy');
+    }
 
-	public function images()
-	{
-		return $this->hasMany(Attachment::class, 'uploadedBy');
-	}
-
-	public function reservations()
-	{
-		return $this->hasMany(Cadeau::class, 'reservedBy');
-	}
+    public function reservations()
+    {
+        return $this->hasMany(Cadeau::class, 'reservedBy');
+    }
 
     public function myList()
     {
@@ -55,8 +54,8 @@ class User extends Model
         return $this->hasMany(Cadeau::class, 'createdBy');
     }
 
-	public function foppers()
-	{
-		return $this->hasMany(Fopper::class, 'fopperVan');
-	}
+    public function foppers()
+    {
+        return $this->hasMany(Fopper::class, 'fopperVan');
+    }
 }

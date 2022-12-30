@@ -8,7 +8,6 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Rennokki\QueryCache\Traits\QueryCacheable;
 
 /**
  * Class Fopper
@@ -26,23 +25,23 @@ use Rennokki\QueryCache\Traits\QueryCacheable;
  */
 class Fopper extends Model
 {
-	protected $table = 'foppers';
+    protected $table = 'foppers';
 
-	protected $casts = [
-		'fopperVan' => 'int',
-		'fopperVoor' => 'int'
-	];
+    protected $casts = [
+        'fopperVan' => 'int',
+        'fopperVoor' => 'int'
+    ];
 
-	protected $fillable = [
-		'description',
-		'fopperVan',
-		'fopperVoor'
-	];
+    protected $fillable = [
+        'description',
+        'fopperVan',
+        'fopperVoor'
+    ];
 
-	public function voor()
-	{
-		return $this->belongsTo(User::class, 'fopperVoor');
-	}
+    public function voor()
+    {
+        return $this->belongsTo(User::class, 'fopperVoor');
+    }
 
     public function eigenaar()
     {

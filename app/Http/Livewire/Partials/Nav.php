@@ -12,7 +12,8 @@ class Nav extends Component
 
     public $users;
 
-    public function mount(){
+    public function mount()
+    {
         $this->users = User::orderBy('name')->get();
     }
 

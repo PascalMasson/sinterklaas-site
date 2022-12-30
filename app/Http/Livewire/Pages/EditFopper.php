@@ -31,7 +31,8 @@ class EditFopper extends Component
         return view('livewire.pages.edit-fopper');
     }
 
-    public function saveFopper(){
+    public function saveFopper()
+    {
         $data = $this->validate();
 
         $this->fopper->save();

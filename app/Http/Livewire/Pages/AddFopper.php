@@ -31,7 +31,8 @@ class AddFopper extends Component
         return view('livewire.pages.add-fopper');
     }
 
-    public function saveFopper(){
+    public function saveFopper()
+    {
         $data = $this->validate();
 
         $this->newFopper->fopperVan = $this->getLoggedInUserId();

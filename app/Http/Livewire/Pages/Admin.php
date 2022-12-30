@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Pages;
 
 use App\Models\Cadeau;
 use App\Models\Fopper;
+use DB;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -35,7 +36,7 @@ class Admin extends Component
             $tables[$tabledata->name] = $tabledata->data;
         }
 
-        \DB::table('foppers')->truncate();
+        DB::table('foppers')->truncate();
         foreach ($tables['foppertjes'] as $old) {
             $new = new Fopper();
             $new->description = $old->Text;
@@ -43,10 +44,10 @@ class Admin extends Component
             $new->fopperVoor = $old->VoorId;
             $new->save();
         }
-        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        \DB::table('cadeaus')->truncate();
-        \DB::table('attachments')->truncate();
-        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('cadeaus')->truncate();
+        DB::table('attachments')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         foreach ($tables['kadootjes'] as $old) {
             $new = new Cadeau();

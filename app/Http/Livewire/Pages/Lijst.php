@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Pages;
 use App\Models\Cadeau;
 use App\Models\User;
 use App\Traits\UseLoggedInUser;
-use Illuminate\Http\Request;
 use Livewire\Component;
 
 class Lijst extends Component

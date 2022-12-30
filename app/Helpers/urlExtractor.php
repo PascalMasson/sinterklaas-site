@@ -1,7 +1,7 @@
 <?php
 
-if (!function_exists('extract_url_name')) {
-    function extract_url_name($url)
+if (!function_exists('extractUrlName')) {
+    function extractUrlName($url)
     {
         $url = substr($url, 0, 4) == 'http' ? $url : 'http://' . $url;
         $d = parse_url($url);
@@ -17,5 +17,3 @@ if (!function_exists('extract_url_name')) {
         return $d['domainX'];
     }
 }
-
-?>

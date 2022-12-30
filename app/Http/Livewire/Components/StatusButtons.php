@@ -12,10 +12,7 @@ class StatusButtons extends Component
 
     public $cadeau;
     public $stretch;
-
-    protected $listeners = ['refreshCadeau' => '$refresh'];
-
-    public $button_classes = [
+    public $buttonClasses = [
         'VRIJ' => [
             'inactive' => 'py-1 px-2 text-sm font-medium text-green-900 bg-transparent rounded-l-lg border border-green-900 hover:bg-green-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-green-500 focus:bg-green-900 focus:text-green',
             'active' => 'py-1 px-2 text-sm font-medium rounded-l-lg border border-green-900 bg-green-900 text-white focus:z-10 focus:ring-2 focus:ring-green-500 focus:bg-green-900 focus:text-green'
@@ -29,7 +26,7 @@ class StatusButtons extends Component
             'active' => 'py-1 px-2 text-sm font-medium rounded-r-md border border-red-800 bg-red-800 text-white focus:z-10 focus:ring-2 focus:ring-red-800 focus:bg-red-800 focus:text-red'
         ]
     ];
-    public $button_classes_mobile = [
+    public $buttonClasses_mobile = [
         'VRIJ' => [
             'inactive' => 'grow py-1 px-2 text-sm font-medium text-green-900 bg-transparent rounded-l-lg border border-green-900 hover:bg-green-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-green-500 focus:bg-green-900 focus:text-green',
             'active' => 'grow py-1 px-2 text-sm font-medium rounded-l-lg border border-green-900 bg-green-900 text-white focus:z-10 focus:ring-2 focus:ring-green-500 focus:bg-green-900 focus:text-green'
@@ -43,6 +40,7 @@ class StatusButtons extends Component
             'active' => 'grow py-1 px-2 text-sm font-medium rounded-r-md border border-red-800 bg-red-800 text-white focus:z-10 focus:ring-2 focus:ring-red-800 focus:bg-red-800 focus:text-red'
         ]
     ];
+    protected $listeners = ['refreshCadeau' => '$refresh'];
 
     public function render()
     {
@@ -54,20 +52,21 @@ class StatusButtons extends Component
     public function updateStatus($status)
     {
         $this->cadeau->status = $status;
-        if($status == "VRIJ"){
+        if ($status == "VRIJ") {
             $this->cadeau->reservedBy = null;
-        }else{
+        } else {
             $this->cadeau->reservedBy = $this->getLoggedInUserId();
         }
         $this->cadeau->save();
         $this->emit('refreshCadeau');
     }
 
-    public function generateButtonClasses($status){
-        if($this->cadeau->status == $status){
-            return $this->button_classes[$status]['active'];
+    public function generateButtonClasses($status)
+    {
+        if ($this->cadeau->status == $status) {
+            return $this->buttonClasses[$status]['active'];
         } else {
-            return $this->button_classes[$status]['inactive'];
+            return $this->buttonClasses[$status]['inactive'];
         }
     }
 
