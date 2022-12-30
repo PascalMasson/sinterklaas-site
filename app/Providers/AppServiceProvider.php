@@ -6,6 +6,7 @@ use App\Models\User;
 use Config;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sanctum\Sanctum;
 use URL;
 use View;
 
@@ -28,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Sanctum::ignoreMigrations();
+
         if (class_exists(\Barryvdh\Debugbar\ServiceProvider::class)) {
             $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
         }
