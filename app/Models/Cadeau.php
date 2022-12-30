@@ -10,7 +10,6 @@ use App\Casts\ReadableNumberCast;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Rennokki\QueryCache\Traits\QueryCacheable;
 
 /**
  * Class Cadeau
@@ -35,40 +34,25 @@ use Rennokki\QueryCache\Traits\QueryCacheable;
 class Cadeau extends Model
 {
 
-	protected $table = 'cadeaus';
+    protected $table = 'cadeaus';
 
-	protected $casts = [
-		'prijs' => ReadableNumberCast::class,
-		'createdBy' => 'int',
-		'listId' => 'int',
-		'reservedBy' => 'int'
-	];
+    protected $casts = [
+        'prijs' => ReadableNumberCast::class,
+        'createdBy' => 'int',
+        'listId' => 'int',
+        'reservedBy' => 'int'
+    ];
 
-	protected $fillable = [
-		'title',
-		'description',
-		'status',
-		'prijs',
-		'location',
-		'createdBy',
-		'listId',
-		'reservedBy'
-	];
-
-	public function reserver()
-	{
-		return $this->belongsTo(User::class, 'reservedBy');
-	}
-
-    public function listOwner()
-    {
-        return $this->belongsTo(User::class, 'listId');
-    }
-
-	public function images()
-	{
-		return $this->hasMany(Attachment::class, 'cadeauId');
-	}
+    protected $fillable = [
+        'title',
+        'description',
+        'status',
+        'prijs',
+        'location',
+        'createdBy',
+        'listId',
+        'reservedBy'
+    ];
 
     public static function boot()
     {
@@ -82,5 +66,20 @@ class Cadeau extends Model
             // do the rest of the cleanup...
         });
 
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Attachment::class, 'cadeauId');
+    }
+
+    public function reserver()
+    {
+        return $this->belongsTo(User::class, 'reservedBy');
+    }
+
+    public function listOwner()
+    {
+        return $this->belongsTo(User::class, 'listId');
     }
 }

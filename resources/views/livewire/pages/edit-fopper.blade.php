@@ -4,7 +4,7 @@
     >
         <div class="mb-6">
             <label for="fopperVoor"
-                   class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Voor:</label>
+                   class="mb-2 block text-sm font-medium text-gray-900 dark:text-gray-300">Voor:</label>
             <select id='fopperVoor' name="fopperVoor" style='width: 200px;' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" wire:model="fopper.fopperVoor">
                 @foreach($users as $user)
                     <option disabled>Selecteer een naam</option>
@@ -28,7 +28,7 @@
                 Fopper bijwerken
             </button>
             <a type="button"
-               href="{{route('lijst', ['lijstId' => Session::get('loggedInUser')->id])}}"
+               href="{{route('lijst', ['lijstId' => auth()->id()])}}"
                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                 Annuleren
             </a>

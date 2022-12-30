@@ -3,7 +3,7 @@
         <div class="flex justify-between">
             <div class="flex space-x-4">
                 {{--                Logo--}}
-                <a href="{{route('lijst', $this->getLoggedInUserId())}}"
+                <a href="{{route('lijst', auth()->user()->name)}}"
                    class="flex items-center py-5 px-3 text-gray-700 hover:text-gray-900">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="w-6 h-6 text-red-400 mr-1">
@@ -40,14 +40,14 @@
                     <a href="{{route('foppers')}}" class="py-5 px-3 text-gray-700 hover:text-gray-900">Mijn foppers</a>
                     <a href="{{route('reserveringen')}}" class="py-5 px-3 text-gray-700 hover:text-gray-900">Mijn
                         reserveringen</a>
-                    @if(in_array($this->getLoggedInUserId(), [1, 7]))
+                    @if(in_array(auth()->id(), [1, 7]))
                         <a href="{{route('admin.index')}}" class="py-5 px-3 text-gray-700 hover:text-gray-900">Admin</a>
                     @endif
                 </div>
             </div>
             {{--            Secondary nav--}}
             <div class="hidden md:flex items-center space-x-1">
-                <span class="mr-3 text-sm text-gray-400">Ingelogd als {{$this->getLoggedInUserName()}}</span>
+                <span class="mr-3 text-sm text-gray-400">Ingelogd als {{auth()->user()->name}}</span>
                 @livewire('components.logout-button')
             </div>
 
@@ -92,7 +92,7 @@
         <a href="{{route('reserveringen')}}" class="py-5 px-3 text-gray-700 hover:text-gray-900 block">Mijn
             reserveringen</a>
 
-        <span class="block py-2 px-3 text-sm text-gray-400">Ingelogd als {{$this->getLoggedInUserName()}}</span>
+        <span class="block py-2 px-3 text-sm text-gray-400">Ingelogd als {{auth()->user()->name}}</span>
         <div class="block py-2 px-3 text-sm text-gray-400">
            @livewire('components.logout-button')
         </div>

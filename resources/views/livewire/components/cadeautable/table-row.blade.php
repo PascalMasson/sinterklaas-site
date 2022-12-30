@@ -6,8 +6,8 @@
     @if(substr($cadeau->location, 0, 4) == "http")
         <td class="py-3 px-6 align-top"><a href="{{$cadeau->location}}" target="_blank"
                                            class="hover:underline text-blue-600">
-                @if(function_exists('extract_url_name'))
-                    {{extract_url_name($cadeau->location)}}
+                @if(function_exists('extractUrlName'))
+                    {{extractUrlName($cadeau->location)}}
                 @else
                     Website
                 @endif

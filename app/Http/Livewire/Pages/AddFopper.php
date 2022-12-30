@@ -4,12 +4,11 @@ namespace App\Http\Livewire\Pages;
 
 use App\Models\Fopper;
 use App\Models\User;
-use App\Traits\UseLoggedInUser;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AddFopper extends Component
 {
-    use UseLoggedInUser;
 
     public $users;
     public $newFopper;
@@ -21,7 +20,7 @@ class AddFopper extends Component
 
     public function mount()
     {
-        $this->users = User::where('id', '!=', $this->getLoggedInUserId())->orderBy('name')->get();
+        $this->users = User::where('id', '!=', Auth::id())->orderBy('name')->get();
         $this->newFopper = new Fopper();
         $this->newFopper->fopperVoor = $this->users[0]->id;
     }
@@ -31,10 +30,11 @@ class AddFopper extends Component
         return view('livewire.pages.add-fopper');
     }
 
-    public function saveFopper(){
+    public function saveFopper()
+    {
         $data = $this->validate();
 
-        $this->newFopper->fopperVan = $this->getLoggedInUserId();
+        $this->newFopper->fopperVan = Auth::id();
         $this->newFopper->save();
 
         return $this->redirect(route('foppers'));

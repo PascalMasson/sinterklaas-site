@@ -3,12 +3,10 @@
 namespace App\Http\Livewire\Components\Cadeautable;
 
 use App\Models\Cadeau;
-use App\Traits\UseLoggedInUser;
 use Livewire\Component;
 
 class Table extends Component
 {
-    use UseLoggedInUser;
 
     public $isMyList;
     public $cadeaus;

@@ -4,10 +4,9 @@ namespace App\Http\Livewire\Pages;
 
 use App\Models\Attachment;
 use App\Models\Cadeau;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Session;
 
 class EditCadeau extends Component
 {
@@ -74,7 +73,7 @@ class EditCadeau extends Component
                 $path = $image->storeAs('images', $name, 'public');
                 $attachment = new Attachment;
                 $attachment->url = $path;
-                $attachment->uploadedBy = \Session::get('loggedInUser')->id;
+                $attachment->uploadedBy = auth()->id();
                 $attachment->cadeauId = $cadeauId;
                 $attachment->save();
             }

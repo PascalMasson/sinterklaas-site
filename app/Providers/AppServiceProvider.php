@@ -2,26 +2,14 @@
 
 namespace App\Providers;
 
-use App\Models\User;
 use Config;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 use URL;
-use View;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
     /**
      * Bootstrap any application services.
      *
@@ -37,7 +25,6 @@ class AppServiceProvider extends ServiceProvider
 
 
         if (Config::get('app.env') === 'production') {
-//            URL::forceRootUrl(Config::get('app.url'));
             URL::forceScheme('https');
         }
 
@@ -53,5 +40,15 @@ class AppServiceProvider extends ServiceProvider
 
             return false;
         });
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
     }
 }

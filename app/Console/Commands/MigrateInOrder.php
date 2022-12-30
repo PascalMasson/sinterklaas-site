@@ -41,13 +41,12 @@ class MigrateInOrder extends Command
             '2022_10_14_114056_setup_foreign_keys.php'
         ];
 
-        foreach($migrations as $migration)
-        {
+        foreach ($migrations as $migration) {
             $basePath = 'database/migrations/';
             $migrationName = trim($migration);
-            $path = $basePath.$migrationName;
+            $path = $basePath . $migrationName;
             $this->call('migrate:refresh', [
-                '--path' => $path ,
+                '--path' => $path,
             ]);
         }
     }

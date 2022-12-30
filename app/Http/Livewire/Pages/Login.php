@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Pages;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
@@ -18,7 +19,7 @@ class Login extends Component
 
         $user = User::where('name', $data['name'])->first();
         if ($user) {
-            Session::put('loggedInUser', $user);
+            Auth::loginUsingId($user->id);
             return redirect(route('lijst', $user->id));
         }
 
@@ -29,8 +30,8 @@ class Login extends Component
 
     public function mount()
     {
-        if (Session::has('loggedInUser')) {
-            return redirect(route('lijst', Session::get('loggedInUser')->id));
+        if(Auth::check()) {
+            return redirect(route('lijst', Auth::user()->id));
         }
     }
 
