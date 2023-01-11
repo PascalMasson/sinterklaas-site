@@ -5,7 +5,7 @@
 */
 
 job("Run shell script") {
-   container(displayName = "Run Test", image = "php:apache") {
+   container(displayName = "Run Test", image = "oberd/php-8.0-apache") {
       shellScript {
          interpreter = "/bin/bash"
          content = """
