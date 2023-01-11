@@ -5,7 +5,7 @@
 */
 
 job("Run shell script") {
-   container(displayName = "Run Test", image = "justinhartman/cakephp3.5-php7-mysql-apache2") {
+   container(displayName = "Run Test", image = "php:apache") {
       shellScript {
          interpreter = "/bin/bash"
          content = """
