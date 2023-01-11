@@ -18,7 +18,6 @@ job("Run shell script") {
             curl -sS https://getcomposer.org/installer | php
             php composer.phar install -n
 
-            cp config/app.default.php config/app.php
             mkdir logs/ && chmod 777 logs/
             ./vendor/bin/phpunit
          """
